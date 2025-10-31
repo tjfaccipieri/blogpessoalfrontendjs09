@@ -9,6 +9,11 @@ import Login from './pages/login/Login';
 import ListaTemas from './components/temas/listaTemas/ListaTemas';
 import FormularioTema from './components/temas/formulariotema/FormularioTema';
 import DeletarTema from './components/temas/deletarTema/DeletarTema';
+import ListaPostagens from './components/postagens/listaPostagens/ListaPostagens';
+import FormPostagem from './components/postagens/formPostagem/FormPostagem';
+import DeletarPostagem from './components/postagens/deletarPostagem/DeletarPostagem';
+import Perfil from './pages/perfil/Perfil';
+import PerfilPlus from './pages/perfilPlus/PerfilPlus';
 
 function App() {
   return (
@@ -26,6 +31,12 @@ function App() {
               <Route path="/cadastrartema" element={<FormularioTema />} />
               <Route path="/editartema/:id" element={<FormularioTema />} />
               <Route path="/deletartema/:id" element={<DeletarTema />} />
+              <Route path="/postagens" element={<ListaPostagens />} />
+              <Route path="/cadastrarpostagem" element={<FormPostagem />} />
+              <Route path="/editarpostagem/:id" element={<FormPostagem />} />
+              <Route path="/deletarpostagem/:id" element={<DeletarPostagem />} />
+              <Route path="/perfil" element={<Perfil />} />
+              <Route path="/perfilplus/:id" element={<PerfilPlus />} />
             </Routes>
           </div>
           <Footer />
