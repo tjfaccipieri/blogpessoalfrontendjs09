@@ -1,9 +1,10 @@
-import { useState, useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ClipLoader } from 'react-spinners';
 import { AuthContext } from '../../../contexts/AuthContext';
 import type Postagem from '../../../models/Postagem';
 import { buscar, deletar } from '../../../services/Service';
+import { ToastAlerta } from '../../../util/ToastAlerta';
 
 function DeletarPostagem() {
   const navigate = useNavigate();
@@ -32,7 +33,7 @@ function DeletarPostagem() {
 
   useEffect(() => {
     if (token === '') {
-      alert('Você precisa estar logado');
+      ToastAlerta('Vish, deu ruim', 'erro');
       navigate('/');
     }
   }, [token]);
@@ -58,7 +59,7 @@ function DeletarPostagem() {
       if (error.toString().includes('401')) {
         handleLogout();
       } else {
-        alert('Erro ao deletar a postagem.');
+        ToastAlerta('Vish, deu ruim', 'erro')
       }
     }
 
@@ -72,7 +73,7 @@ function DeletarPostagem() {
 
   return (
     <div className="container w-1/3 mx-auto">
-      <h1 className="text-4xl text-center my-4">Deletar Postagem</h1>
+      <h1 className="text-4xl text-center my-4">Deletar Postagem - Alerta</h1>
 
       <p className="text-center font-semibold mb-4">
         Você tem certeza de que deseja apagar a postagem a seguir?

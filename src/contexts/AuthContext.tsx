@@ -2,6 +2,8 @@
 import { createContext, useState, type ReactNode } from 'react';
 import type UsuarioLogin from '../models/UsuarioLogin';
 import { login } from '../services/Service';
+import { toast, Bounce } from 'react-toastify';
+import { ToastAlerta } from '../util/ToastAlerta';
 
 // tipagem das funcionalidades que eu vou querer no meu contexto, essa é a ultima parte a ser preenchida, de acordo com o que eu precisar no projeto
 interface AuthContextProps {
@@ -21,7 +23,6 @@ export const AuthContext = createContext({} as AuthContextProps);
 
 // criação da função de provedor do context, sempre vai receber o "({ children }: AuthProviderProps)"
 export function AuthProvider({ children }: AuthProviderProps) {
-
   // criação do estado que vai armazenar os dados do usuário que vai fazer o login
   const [usuario, setUsuario] = useState<UsuarioLogin>({
     id: 0,
@@ -41,9 +42,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
     try {
       await login('/usuarios/logar', usuarioLogin, setUsuario);
-      alert('Logou...aeee');
+      ToastAlerta('Aee, logou', 'sucesso')
     } catch (error) {
-      alert('Deu ruim, confere e-mail e senha ai');
+      ToastAlerta('Vish, deu ruim', 'erro')
       console.log(error);
     }
 
@@ -62,9 +63,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
     });
   }
 
-  return(
-    <AuthContext.Provider value={{usuario, handleLogin, handleLogout, isLoading}}>
+  return (
+    <AuthContext.Provider
+      value={{ usuario, handleLogin, handleLogout, isLoading }}
+    >
       {children}
     </AuthContext.Provider>
-  )
+  );
 }
